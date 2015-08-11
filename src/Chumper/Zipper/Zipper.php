@@ -421,7 +421,9 @@ class Zipper
 			if(!is_dir($dir))
 				$self->getFileHandler()->makeDirectory($dir, 0777, true, true);
             
-            $self->getFileHandler()->put($path . '/' . $tmpPath, $self->getRepository()->getFileStream($oriName));
+            $filePath = $path . '/' . $tmpPath;
+            if (!$self->getFileHandler()->isDirectory($filePath))
+                $self->getFileHandler()->put($filePath, $self->getRepository()->getFileStream($oriName));
 
         });
     }
@@ -450,7 +452,9 @@ class Zipper
 				if(!is_dir($dir))
 					$self->getFileHandler()->makeDirectory($dir, 0777, true, true);
 					
-                $self->getFileHandler()->put($path . '/' . $tmpPath, $self->getRepository()->getFileStream($oriName));
+                $filePath = $path . '/' . $tmpPath;
+                if (!$self->getFileHandler()->isDirectory($filePath))
+                    $self->getFileHandler()->put($filePath, $self->getRepository()->getFileStream($oriName));
             }
         });
     }
